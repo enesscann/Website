@@ -2,7 +2,7 @@
   {
     "id": 0,
     "fullName": "Mehmet Bulut",
-    "photo": "/images/mehmet.jpg",
+    "photo": "images/0-mehmet-bulut.jpg",
     "primaryJob": "",
     "secondaryJob": "",
     "department": "",
@@ -14,10 +14,13 @@
   {
     "id": 1,
     "fullName": "Damla Tuncer",
-    "photo": "/images/damla.jpg",
+    "photo": "images/1-damla-tuncer.jpg",
     "primaryJob": "Waiter",
     "secondaryJob": "Receptionist",
-    "department": ["Waiter","Receptionist"],
+    "department": [
+      "Waiter",
+      "Receptionist"
+    ],
     "age": 27,
     "username": "damla",
     "password": "5730",
@@ -26,7 +29,7 @@
   {
     "id": 2,
     "fullName": "Ahmet Şahin",
-    "photo": "/images/ahmet.jpg",
+    "photo": "images/2-ahmet-sahin.jpg",
     "primaryJob": "Waiter",
     "secondaryJob": "Bartender",
     "department": "Waiter",
@@ -38,7 +41,7 @@
   {
     "id": 3,
     "fullName": "Mustafa Karaca",
-    "photo": "/images/mustafa.jpg",
+    "photo": "images/3-mustafa-karaca.jpg",
     "primaryJob": "Waiter",
     "secondaryJob": "Valet",
     "department": "Waiter",
@@ -50,7 +53,7 @@
   {
     "id": 4,
     "fullName": "Derya Kurt",
-    "photo": "/images/derya.jpg",
+    "photo": "images/4-derya-kurt.jpg",
     "primaryJob": "Waiter",
     "secondaryJob": null,
     "department": "Waiter",
@@ -62,7 +65,7 @@
   {
     "id": 5,
     "fullName": "Emre Özkan",
-    "photo": "/images/emre.jpg",
+    "photo": "images/5-emre-ozkan.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": "Baseman",
     "department": "Housekeeper",
@@ -74,7 +77,7 @@
   {
     "id": 6,
     "fullName": "Zeynep Aydın",
-    "photo": "/images/zeynep.jpg",
+    "photo": "images/6-zeynep-aydin.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": null,
     "department": "Housekeeper",
@@ -86,7 +89,7 @@
   {
     "id": 7,
     "fullName": "Burak Yılmaz",
-    "photo": "/images/burak.jpg",
+    "photo": "images/7-burak-yilmaz.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": "Baseman",
     "department": "Housekeeper",
@@ -98,7 +101,7 @@
   {
     "id": 8,
     "fullName": "Nazlı Koşar",
-    "photo": "/images/nazlı.jpg",
+    "photo": "images/8-nazli-kosar.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": null,
     "department": "Housekeeper",
@@ -110,7 +113,7 @@
   {
     "id": 9,
     "fullName": "Elif Demir",
-    "photo": "/images/elif.jpg",
+    "photo": "images/9-elif-demir.jpg",
     "primaryJob": "Receptionist",
     "secondaryJob": null,
     "department": "Receptionist",
@@ -122,7 +125,7 @@
   {
     "id": 10,
     "fullName": "Hakan Erdem",
-    "photo": "/images/hakan.jpg",
+    "photo": "images/10-hakan-erdem.jpg",
     "primaryJob": "Receptionist",
     "secondaryJob": "Bartender",
     "department": "Receptionist",
@@ -134,7 +137,7 @@
   {
     "id": 11,
     "fullName": "İrem Güneş",
-    "photo": "/images/irem.jpg",
+    "photo": "images/11-irem-gunes.jpg",
     "primaryJob": "Receptionist",
     "secondaryJob": null,
     "department": "Receptionist",
@@ -146,7 +149,7 @@
   {
     "id": 12,
     "fullName": "Oğuz Arslan",
-    "photo": "/images/oğuz.jpg",
+    "photo": "images/12-oguz-arslan.jpg",
     "primaryJob": "Receptionist",
     "secondaryJob": "Bartender",
     "department": "Receptionist",
@@ -158,7 +161,7 @@
   {
     "id": 13,
     "fullName": "Yasemin Uçar",
-    "photo": "/images/yasemin.jpg",
+    "photo": "images/13-yasemin-ucar.jpg",
     "primaryJob": "Receptionist",
     "secondaryJob": null,
     "department": "Receptionist",
@@ -170,7 +173,7 @@
   {
     "id": 14,
     "fullName": "Berk Doğan",
-    "photo": "/images/berk.jpg",
+    "photo": "images/14-berk-dogan.jpg",
     "primaryJob": "Bellboy",
     "secondaryJob": "Bartender",
     "department": "Bellboy",
@@ -182,7 +185,7 @@
   {
     "id": 15,
     "fullName": "Kaan Bozkurt",
-    "photo": "/images/kaan.jpg",
+    "photo": "images/15-kaan-bozkurt.jpg",
     "primaryJob": "Bellboy",
     "secondaryJob": "Waiter",
     "department": "Bellboy",
@@ -194,7 +197,7 @@
   {
     "id": 16,
     "fullName": "Cem Polat",
-    "photo": "/images/cem.jpg",
+    "photo": "images/16-cem-polat.jpg",
     "primaryJob": "Bellboy",
     "secondaryJob": "Waiter",
     "department": "Bellboy",
@@ -206,7 +209,7 @@
   {
     "id": 17,
     "fullName": "Baran Sezer",
-    "photo": "/images/baran.jpg",
+    "photo": "images/17-baran-sezer.jpg",
     "primaryJob": "Bellboy",
     "secondaryJob": null,
     "department": "Bellboy",
@@ -218,7 +221,7 @@
   {
     "id": 18,
     "fullName": "Mehmet Koç",
-    "photo": "/images/mehmet.jpg",
+    "photo": "images/18-mehmet-koc.jpg",
     "primaryJob": "Baseman",
     "secondaryJob": null,
     "department": "Baseman",
@@ -230,7 +233,7 @@
   {
     "id": 19,
     "fullName": "Erhan Yavuz",
-    "photo": "/images/erhan.jpg",
+    "photo": "images/19-erhan-yavuz.jpg",
     "primaryJob": "Valet",
     "secondaryJob": null,
     "department": "Valet",
@@ -242,7 +245,7 @@
   {
     "id": 20,
     "fullName": "Tolga Kılıç",
-    "photo": "/images/tolga.jpg",
+    "photo": "images/20-tolga-kilic.jpg",
     "primaryJob": "Valet",
     "secondaryJob": null,
     "department": "Valet",
@@ -254,7 +257,7 @@
   {
     "id": 21,
     "fullName": "Serkan Tunç",
-    "photo": "/images/serkan.jpg",
+    "photo": "images/21-serkan-tunc.jpg",
     "primaryJob": "Valet",
     "secondaryJob": null,
     "department": "Valet",
@@ -266,7 +269,7 @@
   {
     "id": 22,
     "fullName": "Buse Sarı",
-    "photo": "/images/buse.jpg",
+    "photo": "images/22-buse-sari.jpg",
     "primaryJob": "Security",
     "secondaryJob": null,
     "department": "Security",
@@ -278,7 +281,7 @@
   {
     "id": 23,
     "fullName": "Onur Güler",
-    "photo": "/images/onur.jpg",
+    "photo": "images/23-onur-guler.jpg",
     "primaryJob": "Security",
     "secondaryJob": "Valet",
     "department": "Security",
@@ -290,7 +293,7 @@
   {
     "id": 24,
     "fullName": "Sibel Çetin",
-    "photo": "/images/sibel.jpg",
+    "photo": "images/24-sibel-cetin.jpg",
     "primaryJob": "Security",
     "secondaryJob": null,
     "department": "Security",
@@ -302,7 +305,7 @@
   {
     "id": 25,
     "fullName": "Ece Tekin",
-    "photo": "/images/ece.jpg",
+    "photo": "images/25-ece-tekin.jpg",
     "primaryJob": "Security",
     "secondaryJob": null,
     "department": "Security",
@@ -314,7 +317,7 @@
   {
     "id": 26,
     "fullName": "Simge Aksoy",
-    "photo": "/images/simge.jpg",
+    "photo": "images/26-simge-aksoy.jpg",
     "primaryJob": "Chef",
     "secondaryJob": null,
     "department": "Chef",
@@ -326,7 +329,7 @@
   {
     "id": 27,
     "fullName": "Merve Kaya",
-    "photo": "/images/merve.jpg",
+    "photo": "images/27-merve-kaya.jpg",
     "primaryJob": "Chef",
     "secondaryJob": null,
     "department": "Chef",
@@ -338,7 +341,7 @@
   {
     "id": 28,
     "fullName": "Selin Çelik",
-    "photo": "/images/selin.jpg",
+    "photo": "images/28-selin-celik.jpg",
     "primaryJob": "Chef",
     "secondaryJob": null,
     "department": "Chef",
@@ -350,7 +353,7 @@
   {
     "id": 29,
     "fullName": "Melis Öztürk",
-    "photo": "/images/melis.jpg",
+    "photo": "images/29-melis-ozturk.jpg",
     "primaryJob": "Bartender",
     "secondaryJob": null,
     "department": "Bartender",
@@ -362,7 +365,7 @@
   {
     "id": 30,
     "fullName": "Ayşe Yıldız",
-    "photo": "/images/ayşe.jpg",
+    "photo": "images/30-ayse-yildiz.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": null,
     "department": "Housekeeper",
