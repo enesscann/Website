@@ -206,21 +206,14 @@
   <div id="employee-container" class="employee-container"></div>
 
   <script>
-    function equalizeRowHeights(tableEl) {
-    tableEl.querySelectorAll('tr').forEach(row => {
-      let max = 0;
-      // Önce hücreleri doğal yüksekliğe al, ölç
-      row.querySelectorAll('th, td').forEach(cell => {
-        cell.style.height = 'auto';
-        max = Math.max(max, cell.offsetHeight);
-      });
-      // Sonra tüm hücreleri max kadar sabitle
-      row.querySelectorAll('th, td').forEach(cell => {
-        cell.style.height = max + 'px';
-      });
-    });
-    }
-    
+    function equalizeAllCellHeights(tableEl) {
+    const cells = Array.from(tableEl.querySelectorAll('th, td'));
+    // önce her hücrenin 'auto' olmasını sağlayıp gerçek yüksekliğini ölç
+    cells.forEach(c => c.style.height = 'auto');
+    const maxH = cells.reduce((mx, c) => Math.max(mx, c.offsetHeight), 0);
+    // sonra hepsini maksimum yüksekliğe sabitle
+    cells.forEach(c => c.style.height = maxH + 'px');
+  }
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
     let allEmployees = [];
     let allShifts = {};
@@ -333,7 +326,7 @@
         container.innerHTML = generateDepartmentSchedule(job);
         container.classList.remove("hidden");
         const tbl = container.querySelector('table');
-        if (tbl) equalizeRowHeights(tbl);
+        if (tbl) equalizeAllCellHeights(tbl);
       } else {
         container.classList.add("hidden");
       }
