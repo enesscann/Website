@@ -208,6 +208,13 @@
   <div id="buttons"></div>
 
   <div id="employee-container" class="employee-container"></div>
+  </div> <!-- employee-container kapanışı -->
+
+  <div class="legend">
+    <div><span class="legend-box primary"></span>Primary Job</div>
+    <div><span class="legend-box secondary"></span>Secondary Job</div>
+  </div>
+
 
   <script>
     function equalizeAllCellHeights(tableEl) {
@@ -382,12 +389,6 @@
         html += `</tr>`;
       });
       html += `</tbody></table>`;
-      html += `
-      <div class="legend">
-        <div><span class="legend-box primary"></span>Primary Job</div>
-        <div><span class="legend-box secondary"></span>Secondary Job</div>
-      </div>
-    `;
       return html;
     }
   </script>
