@@ -193,8 +193,8 @@
 
     // Mutlak (absolute) path'lere dikkat!
     Promise.all([
-      fetch("/data/employees.json").then(r => r.json()),
-      fetch("/data/shifts.json").then(r => r.json())
+      fetch("data/employees.json").then(r => r.json()),
+      fetch("data/shifts.json").then(r => r.json())
     ]).then(([employees, shifts]) => {
       allEmployees = employees;
       allShifts    = shifts;
