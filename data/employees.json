@@ -1,6 +1,6 @@
 [
   {
-    "id": 00,
+    "id": 0,
     "fullName": "Mehmet Bulut",
     "photo": "images/00-mehmet-bulut.jpg",
     "primaryJob": "",
@@ -12,7 +12,7 @@
     "role": "manager"
   },
   {
-    "id": 01,
+    "id": 1,
     "fullName": "Damla Tuncer",
     "photo": "images/01-damla-tuncer.jpg",
     "primaryJob": "Waiter",
@@ -27,7 +27,7 @@
     "role": "employee"
   },
   {
-    "id": 02,
+    "id": 2,
     "fullName": "Ahmet Şahin",
     "photo": "images/02-ahmet-sahin.jpg",
     "primaryJob": "Waiter",
@@ -39,7 +39,7 @@
     "role": "employee"
   },
   {
-    "id": 03,
+    "id": 3,
     "fullName": "Mustafa Karaca",
     "photo": "images/03-mustafa-karaca.jpg",
     "primaryJob": "Waiter",
@@ -51,7 +51,7 @@
     "role": "employee"
   },
   {
-    "id": 04,
+    "id": 4,
     "fullName": "Derya Kurt",
     "photo": "images/04-derya-kurt.jpg",
     "primaryJob": "Waiter",
@@ -63,7 +63,7 @@
     "role": "employee"
   },
   {
-    "id": 05,
+    "id": 5,
     "fullName": "Emre Özkan",
     "photo": "images/05-emre-ozkan.jpg",
     "primaryJob": "Housekeeper",
@@ -75,7 +75,7 @@
     "role": "employee"
   },
   {
-    "id": 06,
+    "id": 6,
     "fullName": "Zeynep Aydın",
     "photo": "images/06-zeynep-aydin.jpg",
     "primaryJob": "Housekeeper",
@@ -87,7 +87,7 @@
     "role": "employee"
   },
   {
-    "id": 07,
+    "id": 7,
     "fullName": "Burak Yılmaz",
     "photo": "images/07-burak-yilmaz.jpg",
     "primaryJob": "Housekeeper",
@@ -99,7 +99,7 @@
     "role": "employee"
   },
   {
-    "id": 08,
+    "id": 8,
     "fullName": "Nazlı Koşar",
     "photo": "images/08-nazli-kosar.jpg",
     "primaryJob": "Housekeeper",
@@ -111,7 +111,7 @@
     "role": "employee"
   },
   {
-    "id": 09,
+    "id": 9,
     "fullName": "Elif Demir",
     "photo": "images/09-elif-demir.jpg",
     "primaryJob": "Receptionist",
