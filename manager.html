@@ -141,7 +141,6 @@
 
     table {
       border-collapse: collapse;
-      table_layout: fixed;
       width: 100%;
       margin-top: 20px;
       table-layout: fixed;
@@ -236,8 +235,8 @@
       const searchInput = document.getElementById("search");
 
       Promise.all([
-        fetch("data/employees.json").then(res => res.json()),
-        fetch("data/shifts.json").then(res => res.json())
+        fetch("/data/employees.json").then(res => res.json()),
+        fetch("/data/shifts.json").then(res => res.json())
       ]).then(([employees, shifts]) => {
         allEmployees = employees;
         allShifts = shifts;
