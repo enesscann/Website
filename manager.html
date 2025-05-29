@@ -170,29 +170,26 @@
       margin-bottom: 5px;
     }
     .legend {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 8px;
-      font-size: 18px;
+      /* position: fixed;  <-- bunu kaldırın! */
+      margin: 12px 0 0 0;    /* tablonun hemen altına biraz boşluk */
+      font-size: 16px;       /* daha büyük metin */
+      text-align: left;      /* kutucukların olduğu tarafta hizalama */
+      display: inline-block; /* içerikle boyutlansın */
     }
     .legend div {
-      display: flex;
-      align-items: center;
       margin-bottom: 6px;
     }
     .legend-box {
       display: inline-block;
-      width: 16px;
-      height: 16px;
+      width: 25px;
+      height: 25px;
       margin-right: 6px;
       border-radius: 3px;
+      vertical-align: middle;
     }
-    .legend-box.primary { background-color: green; }
-    .legend-box.secondary { background-color: yellow; color: black; }
+    .legend-box.primary   { background-color: green;  }
+    .legend-box.secondary { background-color: yellow; }
+
   </style>
 </head>
 <body>
@@ -209,12 +206,6 @@
 
   <div id="employee-container" class="employee-container"></div>
   </div> <!-- employee-container kapanışı -->
-
-  <div class="legend">
-    <div><span class="legend-box primary"></span>Primary Job</div>
-    <div><span class="legend-box secondary"></span>Secondary Job</div>
-  </div>
-
 
   <script>
     function equalizeAllCellHeights(tableEl) {
@@ -389,6 +380,12 @@
         html += `</tr>`;
       });
       html += `</tbody></table>`;
+      html += `
+        <div class="legend">
+          <div><span class="legend-box primary"></span>Primary Job</div>
+          <div><span class="legend-box secondary"></span>Secondary Job</div>
+        </div>
+      `;
       return html;
     }
   </script>
