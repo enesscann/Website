@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Employee Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      position: relative;
+    }
+    .background-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("images/background.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.2;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .sidebar {
+      width: 250px;
+      background: #f4f4f4;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .profile-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .profile-name {
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .profile-info {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .profile-info span {
+      font-weight: normal;
+    }
+    .weekly-btn {
+      margin-top: 20px;
+      display: inline-block;
+      min-width: 250px;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .main {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-x: auto;
+    }
+    .department-section h3 {
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+    .department-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+    .department-button {
+      width: 180px;
+      height: 180px;
+      border: 5px solid #ccc;
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      text-align: center;
+      font-size: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .department-button img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .employee-entry {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .employee-entry img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .employee-entry .full {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    table {
+      border: 2px solid #888;
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+      table-layout: auto;
+    }
+    th, td {
+      border: 3px solid #888;
+      padding: 4px;
+      font-size: 25px;
+      min-width: 30px; 
+      height: 36px;
+      text-align: center;
+      vertical-align: middle;
+      word-break: keep-all;
+      white-space: normal;
+      line-height: 1.2;
+    }
+
+    th {
+      background-color: #d0e9c6;
+    }
+    td span {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .department-button.active {
+      transform: scale(1.1);
+      border-color: #007BFF;
+      background-color: #e6f0ff;
+      opacity: 1;
+    }
+    .department-button.inactive {
+      opacity: 0.4;
+    }
+        
+    td[data-color="primary"]   { background-color: green;  color: white;  }
+    td[data-color="secondary"] { background-color: yellow; color: black;  }
+    td[data-color="other"]     { background-color: lightgray; color: black; }
+
+    .hours-display {
+      font-weight: bold;
+      font-size: 25px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="background-layer"></div>
+  <div class="sidebar">
+    <img id="profile-photo" class="profile-photo" src="images/default.jpg" alt="My Photo">
+    <div class="profile-name" id="profile-name">--</div>
+    <div class="profile-info">Age: <span id="profile-age">--</span></div>
+    <div class="profile-info">Primary Job: <span id="profile-primary">--</span></div>
+    <div class="profile-info">Secondary Job: <span id="profile-secondary">--</span></div>
+    <button class="weekly-btn" onclick="showMySchedule()">My Weekly Schedule</button>
+  </div>
+  <div class="main">
+    <div class="department-section" id="department-section">
+      <h3>Department(s):</h3>
+      <div class="department-list" id="department-list"></div>
+    </div>
+    <div class="content" id="main-content"></div>
+  </div>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const employeeId = parseInt(urlParams.get("id"));
+    let currentUser, allEmployees, allShifts;
+
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const jobs = ["Waiter", "Housekeeper", "Receptionist", "Bellboy", "Baseman", "Valet", "Security", "Chef", "Bartender"];
+
+    Promise.all([
+      fetch("data/employees.json").then(r => r.json()),
+      fetch("data/shifts.json").then(r => r.json())
+    ]).then(([employees, shifts]) => {
+      allEmployees = employees;
+      allShifts = shifts;
+      currentUser = employees.find(e => e.id === employeeId);
+      if (!currentUser) throw new Error("Employee not found");
+      updateSidebar(currentUser);
+      loadDepartments(currentUser);
+    });
+
+    function updateSidebar(user) {
+      document.getElementById("profile-photo").src = user.photo || "images/default.jpg";
+      document.getElementById("profile-name").innerText = user.fullName;
+      document.getElementById("profile-age").innerText = user.age || "--";
+      document.getElementById("profile-primary").innerText = user.primaryJob || "--";
+      const secondarySpan = document.getElementById("profile-secondary");
+      let secRaw = user.secondaryJob;
+      let secText;
+
+      if (secRaw === null || secRaw === undefined) {
+        secText = "-";
+      } else {
+        secText = String(secRaw).trim();
+        if (secText === "" || secText.toLowerCase() === "null") {
+          secText = "-";
+        }
+      }
+
+      secondarySpan.innerText = secText;
+    }
+
+    function loadDepartments(user) {
+      const allDepts = new Set();
+      if (user.department) {
+        if (Array.isArray(user.department)) user.department.forEach(d => allDepts.add(d));
+        else allDepts.add(user.department);
+      }
+      if (user.primaryJob) allDepts.add(user.primaryJob);
+      if (user.secondaryJob) allDepts.add(user.secondaryJob);
+
+      const container = document.getElementById("department-list");
+      container.innerHTML = "";
+      for (const dep of allDepts) {
+        const imgSrc = `images/${dep.toLowerCase()}.png`;
+        const btn = document.createElement("button");
+        btn.className = "department-button";
+        btn.innerHTML = `<img src="${imgSrc}" alt="${dep}" onerror="this.src='images/default.png'"><span>${dep}</span>`;
+        btn.onclick = () => showDepartmentEmployees(dep);
+        container.appendChild(btn);
+      }
+    }
+
+
+
+
+    function showDepartmentEmployees(job) {
+      document.querySelectorAll('.department-button').forEach(btn => {
+        const text = btn.querySelector('span').innerText;
+        btn.classList.toggle('active',   text === job);
+        btn.classList.toggle('inactive', text !== job);
+    });
+      const content = document.getElementById("main-content");
+      const list = allEmployees.filter(e =>
+        e.id !== currentUser.id && (
+          e.primaryJob === job || e.secondaryJob === job ||
+          (Array.isArray(e.department) ? e.department.includes(job) : e.department === job)
+        )
+      );
+      content.innerHTML = `<h3>${job} Employees:</h3>` +
+        list.map(emp => {
+          const photo = emp.photo || "images/default.jpg";
+          return `
+            <div class="employee-entry" onclick="showSchedule(${emp.id}, '${emp.fullName}', '${emp.primaryJob}', '${emp.secondaryJob}', ${emp.age})">
+              <img src="${photo}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
+              <div class="full">${emp.fullName}</div>
+            </div>
+          `;
+        }).join("") + `<button class="weekly-btn" onclick="showDepartmentSchedule('${job}')">Weekly ${job} Schedule</button>`;
+    }
+
+    function showDepartmentSchedule(job) {
+      const shiftsByDay = {};
+      days.forEach(day => shiftsByDay[day] = { "V-1": [], "V-2": [], "V-3": [] });
+
+      allEmployees.forEach(emp => {
+        const shifts = allShifts[emp.id];
+        if (!shifts) return;
+        const match = emp.primaryJob === job || emp.secondaryJob === job || (Array.isArray(emp.department) ? emp.department.includes(job) : emp.department === job);
+        if (!match) return;
+        ["V-1", "V-2", "V-3"].forEach(shift => {
+          days.forEach(day => {
+            const entry = shifts?.[shift]?.[day];
+            if (entry?.job === job) {
+              shiftsByDay[day][shift].push({
+                name: emp.fullName,
+                isSelf: emp.id === currentUser.id,
+                isPrimary: emp.primaryJob === job,
+                isSecondary: emp.secondaryJob === job
+              });
+            }
+          });
+        });
+      });
+
+      let html = `<h3>${job} Weekly Schedule</h3><table><thead><tr><th>Shifts</th>`;
+      days.forEach(day => html += `<th>${day}</th>`);
+      html += `</tr></thead><tbody>`;
+      ["V-1", "V-2", "V-3"].forEach(shift => {
+        const label = shift === "V-1" ? "08:00 - 16:00" : shift === "V-2" ? "16:00 - 00:00" : "00:00 - 08:00";
+        html += `<tr><td><strong>${label}</strong></td>`;
+        days.forEach(day => {
+          const cell = shiftsByDay[day][shift];
+          if (cell.length === 0) {
+            html += `<td></td>`;
+          } else {
+            const lines = cell.map(e => {
+              if (!e.isSelf) return `<span>${e.name}</span>`;
+              const color = e.isPrimary ? "green" : "yellow";
+              const textColor = e.isPrimary ? "white" : "black";
+              return `<span style="background-color:${color};color:${textColor};padding:2px 6px;border-radius:4px;">${e.name}</span>`;
+            });
+            html += `<td>${lines.join("")}</td>`;
+          }
+        });
+        html += `</tr>`;
+      });
+      html += `</tbody></table>`;
+      document.getElementById("main-content").innerHTML = html;
+    }
+
+    function showSchedule(id, name, primaryJob, secondaryJob, age) {
+      document.getElementById("department-section").style.display = "none";
+      const selected = allEmployees.find(e => e.id === id);
+      const shifts = allShifts[id];
+      const photo = selected?.photo || "images/default.jpg";
+      let html = `
+        <div style="display:flex;align-items:center;gap:20px;margin-bottom:20px;">
+          <img src="${photo}" alt="${name}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;">
+          <div>
+            <div style="font-weight:bold;font-size:20px;">${name}</div>
+            <div><strong>Age:</strong> ${age || "--"}</div>
+            <div><strong>Primary Job:</strong> ${primaryJob}</div>
+            <div><strong>Secondary Job:</strong> ${secondaryJob && secondaryJob !== "null" ? secondaryJob : "-"}</div>
+          </div>
+        </div>
+      `;
+      html += `<table><thead><tr><th rowspan="2">Departments</th>`;
+      days.forEach(day => html += `<th colspan="3">${day}</th>`);
+      html += `</tr><tr>`;
+      for (let i = 0; i < 7; i++) {
+        html += `<th>08:00 - 16:00</th><th>16:00 - 00:00</th><th>00:00 - 08:00</th>`;
+      }
+      html += `</tr></thead><tbody>`;
+      jobs.forEach(job => {
+        html += `<tr><td>${job}</td>`;
+        days.forEach(day => {
+          ["V-1", "V-2", "V-3"].forEach(shift => {
+            const val = shifts?.[shift]?.[day];
+            if (val?.job === job) {
+              const cls = (job === primaryJob)
+                        ? "primary"
+                        : (job === secondaryJob)
+                          ? "secondary"
+                          : "other";
+              html += `<td data-color="${cls}">✔</td>`;
+            } else {
+              html += `<td></td>`;
+            }
+          });
+        });
+        html += `</tr>`;
+      });
+      html += `</tbody></table>`;
+      let totalHours = 0;
+      ["V-1","V-2","V-3"].forEach(shift => {
+        days.forEach(day => {
+          if (shifts?.[shift]?.[day]?.job) totalHours += 8;
+        });
+      });
+html += `<div class="hours-display">Total Weekly Working Hours: ${totalHours} hours</div>`;
+      document.getElementById("main-content").innerHTML = html;
+    }
+
+    function showMySchedule() {
+      document.getElementById("department-section").style.display = "none";
+      showSchedule(currentUser.id, currentUser.fullName, currentUser.primaryJob, currentUser.secondaryJob, currentUser.age);
+      document.querySelectorAll('.department-button')
+        .forEach(b=>b.classList.remove('active','inactive'));
+    }
+
+    document.getElementById("profile-photo").addEventListener("click", () => {
+      document.getElementById("department-section").style.display = "block";
+      document.getElementById("main-content").innerHTML = "";
+      document.querySelectorAll('.department-button')
+        .forEach(b=>b.classList.remove('active','inactive'));
+    });
+  </script>
+</body>
+</html>

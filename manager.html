@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manager Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      position: relative;
+    }
+
+    .background-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('images/background.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    #search-container {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      z-index: 2;
+    }
+
+    #search {
+      padding: 8px;
+      font-size: 16px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    #buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 70px;
+    }
+
+    #buttons button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      font-size: 22px;
+      border: 4px solid #ccc;
+      background-color: #fff;
+      cursor: pointer;
+      width: 160px;
+      height: 160px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    #buttons button img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 5px;
+    }
+
+    #buttons button.active {
+      transform: scale(1.1);
+      border-color: #007BFF;
+      background-color: #e6f0ff;
+    }
+
+    #buttons button.inactive {
+      opacity: 0.5;
+      transform: scale(0.95);
+    }
+
+    .employee-container {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .employee-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .employee {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 120px;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .employee:hover {
+      background-color: #f0f8ff;
+    }
+
+    .employee img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .employee span {
+      margin-top: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .weekly-toggle {
+      margin-top: 20px;
+      padding: 10px;
+      background: #e0e0e0;
+      border-radius: 6px;
+      cursor: pointer;
+      width: fit-content;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .weekly-schedule.hidden {
+      display: none;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+      table-layout: fixed;
+      border: 2px solid #888;
+    }
+
+    th, td {
+      border: 2px solid #888;
+      padding: 6px;
+      text-align: center;
+      vertical-align: top;
+      min-width: 110px;
+      min-height: 60px;
+      font-size: 14px;
+      word-break: break-word;
+      white-space: nowrap;
+    }
+
+    th {
+      background-color: #d0e9c6;
+      font-size: 15px;
+    }
+
+    td span {
+      display: block;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-layer"></div>
+
+  <h1>Welcome, Manager</h1>
+
+  <div id="search-container">
+    <input type="text" id="search" placeholder="🔍 Search by name...">
+  </div>
+
+  <h2>Departments:</h2>
+  <div id="buttons"></div>
+
+  <div id="employee-container" class="employee-container"></div>
+
+  <script>
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    let allEmployees = [];
+    let allShifts = {};
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const jobs = ["Waiter", "Housekeeper", "Receptionist", "Bellboy", "Baseman", "Valet", "Security", "Chef", "Bartender"];
+      let currentDisplayed = [];
+      let selectedDepartment = null;
+
+      const buttonContainer = document.getElementById("buttons");
+      const employeeContainer = document.getElementById("employee-container");
+      const searchInput = document.getElementById("search");
+
+      Promise.all([
+        fetch("data/employees.json").then(res => res.json()),
+        fetch("data/shifts.json").then(res => res.json())
+      ]).then(([employees, shifts]) => {
+        allEmployees = employees;
+        allShifts = shifts;
+      });
+
+      jobs.forEach(job => {
+        const btn = document.createElement("button");
+        const imageName = job.toLowerCase();
+
+        btn.innerHTML = `
+          <img src="images/${imageName}.png" alt="${job}" onerror="this.src='images/default.png'">
+          ${job}
+        `;
+
+        btn.addEventListener("click", () => {
+          Array.from(buttonContainer.children).forEach(child => {
+            child.classList.remove("active");
+            child.classList.add("inactive");
+          });
+
+          btn.classList.add("active");
+          btn.classList.remove("inactive");
+
+          const filtered = allEmployees.filter(emp =>
+            emp.primaryJob === job || emp.secondaryJob === job ||
+            (Array.isArray(emp.department) ? emp.department.includes(job) : emp.department === job)
+          );
+
+          selectedDepartment = job;
+          currentDisplayed = filtered;
+          searchInput.value = "";
+          renderEmployees(filtered, job);
+        });
+
+        buttonContainer.appendChild(btn);
+      });
+
+      searchInput.addEventListener("input", () => {
+        const keyword = searchInput.value.toLowerCase();
+        let filtered;
+
+        if (selectedDepartment) {
+          filtered = currentDisplayed.filter(emp =>
+            emp.fullName.toLowerCase().includes(keyword)
+          );
+        } else {
+          filtered = allEmployees.filter(emp =>
+            emp.fullName.toLowerCase().includes(keyword)
+          );
+        }
+
+        if (keyword === "") {
+          employeeContainer.innerHTML = "";
+        } else {
+          renderEmployees(filtered, selectedDepartment || "All");
+        }
+      });
+
+      function renderEmployees(list, title = "All") {
+        const heading = title === "All" ? "Search Results" : `Employees in ${title} Department`;
+        const scheduleId = `schedule-${title}`;
+        employeeContainer.innerHTML = `
+          <h3>${heading}:</h3>
+          <div class="employee-list" id="list"></div>
+          <div class="weekly-toggle" onclick="toggleDepartmentSchedule('${title}')">Weekly ${title} Schedule</div>
+          <div id="${scheduleId}" class="weekly-schedule hidden"></div>
+        `;
+
+        const listContainer = document.getElementById("list");
+        if (list.length === 0) {
+          listContainer.innerHTML = "<p>No employees found.</p>";
+          return;
+        }
+
+        list.forEach(emp => {
+          const div = document.createElement("div");
+          div.className = "employee";
+          div.innerHTML = `
+            <img src="${emp.photo}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
+            <span>${emp.fullName}</span>
+          `;
+          div.onclick = () => {
+            window.location.href = "employee.html?id=" + emp.id;
+          };
+          listContainer.appendChild(div);
+        });
+      }
+    });
+
+    function toggleDepartmentSchedule(job) {
+      const container = document.getElementById(`schedule-${job}`);
+      if (!container) return;
+      if (container.classList.contains("hidden")) {
+        container.innerHTML = generateDepartmentSchedule(job);
+        container.classList.remove("hidden");
+      } else {
+        container.classList.add("hidden");
+      }
+    }
+
+    function generateDepartmentSchedule(job) {
+      const shiftsByDay = {};
+      days.forEach(day => shiftsByDay[day] = { "V-1": [], "V-2": [], "V-3": [] });
+
+      allEmployees.forEach(emp => {
+        const shifts = allShifts[emp.id];
+        if (!shifts) return;
+        const match = emp.primaryJob === job || emp.secondaryJob === job || (Array.isArray(emp.department) ? emp.department.includes(job) : emp.department === job);
+        if (!match) return;
+        ["V-1", "V-2", "V-3"].forEach(shift => {
+          days.forEach(day => {
+            const entry = shifts?.[shift]?.[day];
+            if (entry?.job === job) {
+              shiftsByDay[day][shift].push({
+                name: emp.fullName,
+                isPrimary: emp.primaryJob === job,
+                isSecondary: emp.secondaryJob === job
+              });
+            }
+          });
+        });
+      });
+
+      let html = `<table><thead><tr><th>Shifts</th>`;
+      days.forEach(day => html += `<th>${day}</th>`);
+      html += `</tr></thead><tbody>`;
+      ["V-1", "V-2", "V-3"].forEach(shift => {
+        const label = shift === "V-1" ? "08:00 - 16:00" : shift === "V-2" ? "16:00 - 00:00" : "00:00 - 08:00";
+        html += `<tr><td><strong>${label}</strong></td>`;
+        days.forEach(day => {
+          const cell = shiftsByDay[day][shift];
+          if (cell.length === 0) {
+            html += `<td></td>`;
+          } else {
+            const lines = cell.map(e => {
+              const color = e.isPrimary ? "green" : e.isSecondary ? "yellow" : "";
+              const textColor = e.isPrimary ? "white" : e.isSecondary ? "black" : "";
+              const style = color ? `style="background-color:${color};color:${textColor};padding:2px 6px;border-radius:4px;"` : "";
+              return `<span ${style}>${e.name}</span>`;
+            });
+            html += `<td>${lines.join("")}</td>`;
+          }
+        });
+        html += `</tr>`;
+      });
+      html += `</tbody></table>`;
+      return html;
+    }
+  </script>
+</body>
+</html>

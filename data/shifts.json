@@ -1,0 +1,1196 @@
+{
+  "1": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Waiter"
+      },
+      "Sunday": {
+        "job": "Waiter"
+      }
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Receptionist"
+      },
+      "Wednesday": {
+        "job": "Receptionist"
+      },
+      "Thursday": {
+        "job": "Receptionist"
+      },
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "2": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {
+        "job": "Waiter"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Bartender"
+      },
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Bartender"
+      },
+      "Friday": {
+        "job": "Bartender"
+      },
+      "Saturday": {
+        "job": "Bartender"
+      },
+      "Sunday": {
+        "job": "Bartender"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "3": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Waiter"
+      },
+      "Friday": {
+        "job": "Waiter"
+      },
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Waiter"
+      },
+      "Tuesday": {
+        "job": "Waiter"
+      },
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Waiter"
+      },
+      "Sunday": {
+        "job": "Waiter"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "4": {
+    "V-1": {
+      "Monday": {
+        "job": "Waiter"
+      },
+      "Tuesday": {
+        "job": "Waiter"
+      },
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Waiter"
+      },
+      "Sunday": {
+        "job": "Waiter"
+      }
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {
+        "job": "Waiter"
+      },
+      "Thursday": {
+        "job": "Waiter"
+      },
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "5": {
+    "V-1": {
+      "Monday": {
+        "job": "Housekeeper"
+      },
+      "Tuesday": {
+        "job": "Housekeeper"
+      },
+      "Wednesday": {
+        "job": "Housekeeper"
+      },
+      "Thursday": {
+        "job": "Housekeeper"
+      },
+      "Friday": {},
+      "Saturday": {
+        "job": "Housekeeper"
+      },
+      "Sunday": {
+        "job": "Housekeeper"
+      }
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "6": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Housekeeper"
+      },
+      "Tuesday": {
+        "job": "Housekeeper"
+      },
+      "Wednesday": {
+        "job": "Housekeeper"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Housekeeper"
+      },
+      "Friday": {
+        "job": "Housekeeper"
+      },
+      "Saturday": {
+        "job": "Housekeeper"
+      },
+      "Sunday": {}
+    }
+  },
+  "7": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {
+        "job": "Housekeeper"
+      },
+      "Saturday": {
+        "job": "Housekeeper"
+      },
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Baseman"
+      },
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {
+        "job": "Housekeeper"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Housekeeper"
+      },
+      "Wednesday": {
+        "job": "Housekeeper"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "8": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Housekeeper"
+      },
+      "Friday": {
+        "job": "Housekeeper"
+      },
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Housekeeper"
+      },
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {
+        "job": "Housekeeper"
+      },
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {
+        "job": "Housekeeper"
+      }
+    }
+  },
+  "9": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Receptionist"
+      },
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {
+        "job": "Receptionist"
+      },
+      "Saturday": {
+        "job": "Receptionist"
+      },
+      "Sunday": {
+        "job": "Receptionist"
+      }
+    },
+    "V-3": {
+      "Monday": {
+        "job": "Receptionist"
+      },
+      "Tuesday": {
+        "job": "Receptionist"
+      },
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "10": {
+    "V-1": {
+      "Monday": {
+        "job": "Receptionist"
+      },
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Receptionist"
+      },
+      "Sunday": {
+        "job": "Receptionist"
+      }
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Bartender"
+      },
+      "Wednesday": {
+        "job": "Bartender"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "11": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Receptionist"
+      },
+      "Wednesday": {
+        "job": "Receptionist"
+      },
+      "Thursday": {},
+      "Friday": {
+        "job": "Receptionist"
+      },
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Receptionist"
+      },
+      "Sunday": {
+        "job": "Receptionist"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "12": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Receptionist"
+      },
+      "Sunday": {
+        "job": "Receptionist"
+      }
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Receptionist"
+      },
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Bartender"
+      },
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Bartender"
+      },
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "13": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {
+        "job": "Receptionist"
+      },
+      "Thursday": {
+        "job": "Receptionist"
+      },
+      "Friday": {
+        "job": "Receptionist"
+      },
+      "Saturday": {
+        "job": "Receptionist"
+      },
+      "Sunday": {
+        "job": "Receptionist"
+      }
+    }
+  },
+  "14": {
+    "V-1": {
+      "Monday": {
+        "job": "Bellboy"
+      },
+      "Tuesday": {},
+      "Wednesday": {
+        "job": "Bellboy"
+      },
+      "Thursday": {
+        "job": "Bellboy"
+      },
+      "Friday": {
+        "job": "Bellboy"
+      },
+      "Saturday": {
+        "job": "Bellboy"
+      },
+      "Sunday": {
+        "job": "Bellboy"
+      }
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "15": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Bellboy"
+      },
+      "Tuesday": {
+        "job": "Bellboy"
+      },
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {
+        "job": "Bellboy"
+      },
+      "Saturday": {
+        "job": "Waiter"
+      },
+      "Sunday": {
+        "job": "Bellboy"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {
+        "job": "Bellboy"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "16": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Bellboy"
+      },
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {
+        "job": "Bellboy"
+      },
+      "Thursday": {
+        "job": "Bellboy"
+      },
+      "Friday": {
+        "job": "Waiter"
+      },
+      "Saturday": {
+        "job": "Bellboy"
+      },
+      "Sunday": {
+        "job": "Waiter"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "17": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {
+        "job": "Bellboy"
+      },
+      "Tuesday": {
+        "job": "Bellboy"
+      },
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Bellboy"
+      },
+      "Friday": {
+        "job": "Bellboy"
+      },
+      "Saturday": {
+        "job": "Bellboy"
+      },
+      "Sunday": {
+        "job": "Bellboy"
+      }
+    }
+  },
+  "18": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Baseman"
+      },
+      "Wednesday": {
+        "job": "Baseman"
+      },
+      "Thursday": {
+        "job": "Baseman"
+      },
+      "Friday": {
+        "job": "Baseman"
+      },
+      "Saturday": {
+        "job": "Baseman"
+      },
+      "Sunday": {
+        "job": "Baseman"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "19": {
+    "V-1": {
+      "Monday": {
+        "job": "Valet"
+      },
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Valet"
+      },
+      "Wednesday": {
+        "job": "Valet"
+      },
+      "Thursday": {
+        "job": "Valet"
+      },
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "20": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Valet"
+      },
+      "Friday": {
+        "job": "Valet"
+      },
+      "Saturday": {
+        "job": "Valet"
+      },
+      "Sunday": {
+        "job": "Valet"
+      }
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Valet"
+      },
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "21": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Valet"
+      },
+      "Wednesday": {
+        "job": "Valet"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {
+        "job": "Valet"
+      },
+      "Saturday": {
+        "job": "Valet"
+      },
+      "Sunday": {
+        "job": "Valet"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "22": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {
+        "job": "Security"
+      }
+    },
+    "V-3": {
+      "Monday": {
+        "job": "Security"
+      },
+      "Tuesday": {
+        "job": "Security"
+      },
+      "Wednesday": {
+        "job": "Security"
+      },
+      "Thursday": {
+        "job": "Security"
+      },
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "23": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {
+        "job": "Security"
+      },
+      "Saturday": {
+        "job": "Security"
+      },
+      "Sunday": {
+        "job": "Security"
+      }
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Security"
+      },
+      "Tuesday": {},
+      "Wednesday": {
+        "job": "Security"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "24": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Security"
+      },
+      "Wednesday": {
+        "job": "Security"
+      },
+      "Thursday": {
+        "job": "Security"
+      },
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {
+        "job": "Security"
+      },
+      "Saturday": {
+        "job": "Security"
+      },
+      "Sunday": {
+        "job": "Security"
+      }
+    }
+  },
+  "25": {
+    "V-1": {
+      "Monday": {
+        "job": "Security"
+      },
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {
+        "job": "Security"
+      },
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Security"
+      },
+      "Friday": {
+        "job": "Security"
+      },
+      "Saturday": {
+        "job": "Security"
+      },
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "26": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Chef"
+      },
+      "Friday": {
+        "job": "Chef"
+      },
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Chef"
+      },
+      "Sunday": {
+        "job": "Chef"
+      }
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "27": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {
+        "job": "Chef"
+      },
+      "Sunday": {
+        "job": "Chef"
+      }
+    },
+    "V-2": {
+      "Monday": {
+        "job": "Chef"
+      },
+      "Tuesday": {
+        "job": "Chef"
+      },
+      "Wednesday": {
+        "job": "Chef"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "28": {
+    "V-1": {
+      "Monday": {
+        "job": "Chef"
+      },
+      "Tuesday": {
+        "job": "Chef"
+      },
+      "Wednesday": {
+        "job": "Chef"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Chef"
+      },
+      "Friday": {
+        "job": "Chef"
+      },
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  },
+  "29": {
+    "V-1": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {
+        "job": "Bartender"
+      },
+      "Tuesday": {},
+      "Wednesday": {
+        "job": "Bartender"
+      },
+      "Thursday": {},
+      "Friday": {
+        "job": "Bartender"
+      },
+      "Saturday": {
+        "job": "Bartender"
+      },
+      "Sunday": {
+        "job": "Bartender"
+      }
+    }
+  },
+  "30": {
+    "V-1": {
+      "Monday": {
+        "job": "Housekeeper"
+      },
+      "Tuesday": {
+        "job": "Housekeeper"
+      },
+      "Wednesday": {
+        "job": "Housekeeper"
+      },
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {
+        "job": "Housekeeper"
+      }
+    },
+    "V-2": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {
+        "job": "Housekeeper"
+      },
+      "Friday": {
+        "job": "Housekeeper"
+      },
+      "Saturday": {},
+      "Sunday": {}
+    },
+    "V-3": {
+      "Monday": {},
+      "Tuesday": {},
+      "Wednesday": {},
+      "Thursday": {},
+      "Friday": {},
+      "Saturday": {},
+      "Sunday": {}
+    }
+  }
+}

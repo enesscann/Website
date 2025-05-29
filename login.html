@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Log in</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .background-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('images/background.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.5;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    form {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 300px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    #message {
+      color: red;
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-layer"></div>
+
+  <h2>Log in</h2>
+  <form id="loginForm">
+    <label>Username: <input type="text" id="username" required></label><br><br>
+    <label>Password: <input type="password" id="password" required></label><br><br>
+    <button type="submit">Enter</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      try {
+        const response = await fetch('data/employees.json');
+        const users = await response.json();
+
+        const matched = users.find(u => u.username === username && u.password === password);
+
+        if (matched) {
+          localStorage.setItem('userId', matched.id);
+          if (matched.role === 'manager') {
+            window.location.href = 'manager.html';
+          } else {
+            window.location.href = 'employee_dashboard.html';
+          }
+        } else {
+          document.getElementById('message').innerText = "Login failed. Please try again.";
+        }
+      } catch (err) {
+        document.getElementById('message').innerText = "Error loading users.";
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
