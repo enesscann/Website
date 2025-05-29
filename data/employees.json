@@ -1,8 +1,8 @@
 [
   {
-    "id": 0,
+    "id": 00,
     "fullName": "Mehmet Bulut",
-    "photo": "images/0-mehmet-bulut.jpg",
+    "photo": "images/00-mehmet-bulut.jpg",
     "primaryJob": "",
     "secondaryJob": "",
     "department": "",
@@ -12,9 +12,9 @@
     "role": "manager"
   },
   {
-    "id": 1,
+    "id": 01,
     "fullName": "Damla Tuncer",
-    "photo": "images/1-damla-tuncer.jpg",
+    "photo": "images/01-damla-tuncer.jpg",
     "primaryJob": "Waiter",
     "secondaryJob": "Receptionist",
     "department": [
@@ -27,9 +27,9 @@
     "role": "employee"
   },
   {
-    "id": 2,
+    "id": 02,
     "fullName": "Ahmet Şahin",
-    "photo": "images/2-ahmet-sahin.jpg",
+    "photo": "images/02-ahmet-sahin.jpg",
     "primaryJob": "Waiter",
     "secondaryJob": "Bartender",
     "department": "Waiter",
@@ -39,9 +39,9 @@
     "role": "employee"
   },
   {
-    "id": 3,
+    "id": 03,
     "fullName": "Mustafa Karaca",
-    "photo": "images/3-mustafa-karaca.jpg",
+    "photo": "images/03-mustafa-karaca.jpg",
     "primaryJob": "Waiter",
     "secondaryJob": "Valet",
     "department": "Waiter",
@@ -51,9 +51,9 @@
     "role": "employee"
   },
   {
-    "id": 4,
+    "id": 04,
     "fullName": "Derya Kurt",
-    "photo": "images/4-derya-kurt.jpg",
+    "photo": "images/04-derya-kurt.jpg",
     "primaryJob": "Waiter",
     "secondaryJob": null,
     "department": "Waiter",
@@ -63,9 +63,9 @@
     "role": "employee"
   },
   {
-    "id": 5,
+    "id": 05,
     "fullName": "Emre Özkan",
-    "photo": "images/5-emre-ozkan.jpg",
+    "photo": "images/05-emre-ozkan.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": "Baseman",
     "department": "Housekeeper",
@@ -75,9 +75,9 @@
     "role": "employee"
   },
   {
-    "id": 6,
+    "id": 06,
     "fullName": "Zeynep Aydın",
-    "photo": "images/6-zeynep-aydin.jpg",
+    "photo": "images/06-zeynep-aydin.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": null,
     "department": "Housekeeper",
@@ -87,9 +87,9 @@
     "role": "employee"
   },
   {
-    "id": 7,
+    "id": 07,
     "fullName": "Burak Yılmaz",
-    "photo": "images/7-burak-yilmaz.jpg",
+    "photo": "images/07-burak-yilmaz.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": "Baseman",
     "department": "Housekeeper",
@@ -99,9 +99,9 @@
     "role": "employee"
   },
   {
-    "id": 8,
+    "id": 08,
     "fullName": "Nazlı Koşar",
-    "photo": "images/8-nazli-kosar.jpg",
+    "photo": "images/08-nazli-kosar.jpg",
     "primaryJob": "Housekeeper",
     "secondaryJob": null,
     "department": "Housekeeper",
@@ -111,9 +111,9 @@
     "role": "employee"
   },
   {
-    "id": 9,
+    "id": 09,
     "fullName": "Elif Demir",
-    "photo": "images/9-elif-demir.jpg",
+    "photo": "images/09-elif-demir.jpg",
     "primaryJob": "Receptionist",
     "secondaryJob": null,
     "department": "Receptionist",
