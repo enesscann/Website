@@ -74,7 +74,7 @@
           if (matched.role === 'manager') {
             window.location.href = 'manager.html';
           } else {
-            window.location.href = `employee_dashboard.html?id=${matched.id}`;
+            window.location.href = `employee_dashboard?id=${matched.id}`;
           }
         } else {
           document.getElementById('message').innerText = "Login failed. Please try again.";
