@@ -183,7 +183,13 @@
   </div>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const employeeId = parseInt(urlParams.get("id"));
+    let employeeId = urlParams.get("id");
+    if (!employeeId) {
+      employeeId = localStorage.getItem('userId');
+    }
+    const employeeIdNum = parseInt(employeeId, 10);
+    
+
     let currentUser, allEmployees, allShifts;
 
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
