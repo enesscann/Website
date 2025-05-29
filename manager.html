@@ -170,11 +170,11 @@
       margin-bottom: 5px;
     }
     .legend {
-      /* position: fixed;  <-- bunu kaldırın! */
-      margin: 12px 0 0 0;    /* tablonun hemen altına biraz boşluk */
-      font-size: 16px;       /* daha büyük metin */
-      text-align: left;      /* kutucukların olduğu tarafta hizalama */
-      display: inline-block; /* içerikle boyutlansın */
+      clear: both;
+      float: right;
+      margin: 12px 0 0 0;  
+      font-size: 16px;       
+      line-height: 1.4;  
     }
     .legend div {
       margin-bottom: 6px;
@@ -182,7 +182,7 @@
     .legend-box {
       display: inline-block;
       width: 25px;
-      height: 25px;
+      height: 16px;
       margin-right: 6px;
       border-radius: 3px;
       vertical-align: middle;
