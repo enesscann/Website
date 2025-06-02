@@ -110,6 +110,7 @@
       transform: scale(1.05);
       border-color: #007BFF;
       background-color: #e6f0ff;
+      opacity: 1;
     }
     .department-button.inactive {
       opacity: 0.5;
@@ -145,6 +146,60 @@
       text-align: center;
       font-weight: bold;
     }
+    .weekly-toggle {
+      margin-top: 20px;
+      padding: 10px;
+      background: #e0e0e0;
+      border-radius: 6px;
+      cursor: pointer;
+      width: fit-content;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .weekly-schedule.hidden {
+      display: none;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+      table-layout: fixed;
+      border: 2px solid #888;
+    }
+    th, td {
+      border: 2px solid #888;
+      padding: 6px;
+      text-align: center;
+      vertical-align: middle;
+      min-width: 80px;
+      min-height: 50px;
+      font-size: 14px;
+      word-break: break-word;
+      white-space: nowrap;
+    }
+    th {
+      background-color: #d0e9c6;
+      font-size: 15px;
+    }
+    td[data-color="primary"]   { background-color: green;  color: white; }
+    td[data-color="secondary"] { background-color: yellow; color: black; }
+    td[data-color="other"]     { background-color: lightgray; color: black; }
+    td span {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .legend {
+      clear: both;
+      float: right;
+      margin: 12px 0 0 0;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .legend div {
+      margin-bottom: 6px;
+    }
+    .legend-box.primary   { display: inline-block; width: 25px; height: 16px; margin-right: 6px; border-radius: 3px; background-color: green; }
+    .legend-box.secondary { display: inline-block; width: 25px; height: 16px; margin-right: 6px; border-radius: 3px; background-color: yellow; }
     .job-tag.primary {
       background-color: green;
       color: white;
@@ -186,7 +241,13 @@
       <h3>Departments:</h3>
       <div class="department-list" id="department-list"></div>
     </div>
-    <div class="employee-list" id="employee-list"></div>
+    <div id="employee-list" class="employee-list"></div>
+
+    <!-- Weekly department schedule placeholder -->
+    <div id="weekly-dept-container" class="weekly-schedule hidden">
+      <div class="weekly-toggle" id="weekly-dept-toggle">Weekly <span id="weekly-dept-name"></span> Schedule</div>
+      <div id="weekly-dept-schedule"></div>
+    </div>
   </div>
 
   <script>
@@ -221,7 +282,10 @@
       document.getElementById("profile-name").innerText = currentUser.fullName;
       document.getElementById("profile-age").innerText = currentUser.age || "--";
       document.getElementById("profile-primary").innerText = currentUser.primaryJob || "--";
-      document.getElementById("profile-secondary").innerText = currentUser.secondaryJob && currentUser.secondaryJob !== "null" ? currentUser.secondaryJob : "-";
+      document.getElementById("profile-secondary").innerText =
+        currentUser.secondaryJob && currentUser.secondaryJob !== "null"
+        ? currentUser.secondaryJob
+        : "-";
 
       // Populate departments
       const deptSet = new Set();
@@ -244,7 +308,7 @@
           <img src="images/${dep.toLowerCase()}.png" alt="${dep}" onerror="this.src='images/default.png'">
           ${dep}
         `;
-        btn.onclick = () => filterByDepartment(dep, btn);
+        btn.onclick = () => selectDepartment(dep, btn);
         deptContainer.appendChild(btn);
       });
 
@@ -252,17 +316,31 @@
       document.getElementById("my-schedule-btn").onclick = () => {
         window.location.href = `employee.html?id=${currentUser.id}`;
       };
+
+      // Profile photo click: reset to show only departments, hide employee list & schedule
+      document.getElementById("profile-photo").onclick = () => {
+        document.querySelectorAll(".department-button").forEach(b => {
+          b.classList.remove("active");
+          b.classList.remove("inactive");
+        });
+        document.getElementById("employee-list").innerHTML = "";
+        hideWeeklyDept();
+      };
     }).catch(err => {
       console.error("Error loading data:", err);
     });
 
-    function filterByDepartment(department, clickedBtn) {
-      // Highlight clicked department button
+    function selectDepartment(department, clickedBtn) {
+      // Highlight clicked department button; dim others
       document.querySelectorAll(".department-button").forEach(b => {
         b.classList.remove("active");
         b.classList.add("inactive");
       });
       clickedBtn.classList.add("active");
+      clickedBtn.classList.remove("inactive");
+
+      // Hide any previous schedule
+      hideWeeklyDept();
 
       // Filter employees in same department (excluding current user)
       const filtered = allEmployees.filter(emp => {
@@ -275,25 +353,119 @@
         return inPrimary || inSecondary || inDept;
       });
 
-      // Render list
+      // Render employee cards
       const listContainer = document.getElementById("employee-list");
       listContainer.innerHTML = "";
       if (filtered.length === 0) {
         listContainer.innerHTML = "<p>No employees in this department.</p>";
-        return;
+      } else {
+        filtered.forEach(emp => {
+          const card = document.createElement("div");
+          card.className = "employee-card";
+          card.innerHTML = `
+            <img src="${emp.photo || 'images/default.jpg'}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
+            <span>${emp.fullName}</span>
+          `;
+          card.onclick = () => {
+            window.location.href = `employee.html?id=${emp.id}`;
+          };
+          listContainer.appendChild(card);
+        });
       }
-      filtered.forEach(emp => {
-        const card = document.createElement("div");
-        card.className = "employee-card";
-        card.innerHTML = `
-          <img src="${emp.photo || 'images/default.jpg'}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
-          <span>${emp.fullName}</span>
-        `;
-        card.onclick = () => {
-          window.location.href = `employee.html?id=${emp.id}`;
-        };
-        listContainer.appendChild(card);
+
+      // Show weekly-dept container and set its department name
+      document.getElementById("weekly-dept-name").innerText = department;
+      document.getElementById("weekly-dept-container").classList.remove("hidden");
+
+      // Clicking the toggle shows/hides schedule
+      document.getElementById("weekly-dept-toggle").onclick = () => {
+        toggleWeeklyDept(department);
+      };
+    }
+
+    function hideWeeklyDept() {
+      const container = document.getElementById("weekly-dept-container");
+      container.classList.add("hidden");
+      container.querySelector("#weekly-dept-schedule").innerHTML = "";
+    }
+
+    function toggleWeeklyDept(department) {
+      const scheduleDiv = document.getElementById("weekly-dept-schedule");
+      if (scheduleDiv.innerHTML.trim() === "") {
+        scheduleDiv.innerHTML = generateDepartmentSchedule(department);
+        // Equalize cell heights
+        const tbl = scheduleDiv.querySelector('table');
+        if (tbl) equalizeAllCellHeights(tbl);
+      } else {
+        scheduleDiv.innerHTML = "";
+      }
+    }
+
+    function generateDepartmentSchedule(department) {
+      const shiftsByDay = {};
+      days.forEach(day => shiftsByDay[day] = { "V-1": [], "V-2": [], "V-3": [] });
+
+      allEmployees.forEach(emp => {
+        const shifts = allShifts[emp.id];
+        if (!shifts) return;
+        const match = (
+          emp.primaryJob === department ||
+          emp.secondaryJob === department ||
+          (Array.isArray(emp.department) ? emp.department.includes(department) : emp.department === department)
+        );
+        if (!match) return;
+
+        ["V-1", "V-2", "V-3"].forEach(shift => {
+          days.forEach(day => {
+            const entry = shifts?.[shift]?.[day];
+            if (entry?.job === department) {
+              shiftsByDay[day][shift].push({
+                name: emp.fullName,
+                isPrimary: emp.primaryJob === department,
+                isSecondary: emp.secondaryJob === department
+              });
+            }
+          });
+        });
       });
+
+      let html = `<table><thead><tr><th>Shifts</th>`;
+      days.forEach(day => html += `<th>${day}</th>`);
+      html += `</tr></thead><tbody>`;
+      ["V-1", "V-2", "V-3"].forEach(shift => {
+        const label = shift === "V-1" ? "08:00 - 16:00" : shift === "V-2" ? "16:00 - 00:00" : "00:00 - 08:00";
+        html += `<tr><td><strong>${label}</strong></td>`;
+        days.forEach(day => {
+          const cell = shiftsByDay[day][shift];
+          if (cell.length === 0) {
+            html += `<td></td>`;
+          } else {
+            const lines = cell.map(e => {
+              const color = e.isPrimary ? "green" : e.isSecondary ? "yellow" : "";
+              const textColor = e.isPrimary ? "white" : e.isSecondary ? "black" : "";
+              const style = color ? `style="background-color:${color};color:${textColor};padding:2px 6px;border-radius:4px;"` : "";
+              return `<span ${style}>${e.name}</span>`;
+            });
+            html += `<td>${lines.join("")}</td>`;
+          }
+        });
+        html += `</tr>`;
+      });
+      html += `</tbody></table>`;
+      html += `
+        <div class="legend">
+          <div><span class="legend-box primary"></span>Primary Job</div>
+          <div><span class="legend-box secondary"></span>Secondary Job</div>
+        </div>
+      `;
+      return html;
+    }
+
+    function equalizeAllCellHeights(tableEl) {
+      const cells = Array.from(tableEl.querySelectorAll('th, td'));
+      cells.forEach(c => c.style.height = 'auto');
+      const maxH = cells.reduce((mx, c) => Math.max(mx, c.offsetHeight), 0);
+      cells.forEach(c => c.style.height = maxH + 'px');
     }
   </script>
 </body>
