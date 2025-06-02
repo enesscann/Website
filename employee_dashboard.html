@@ -162,7 +162,7 @@
     }
 
     /* ---------------------------------------------- */
-    /*  Job-tag için eklenen sınıflar:               */
+    /*  “Legend” / renkli etiketler için sınıflar:    */
     .job-tag.primary {
       display: inline-block;
       background-color: green;
@@ -189,14 +189,16 @@
   <div class="sidebar">
     <img id="profile-photo" class="profile-photo" src="images/default.jpg" alt="My Photo">
     <div class="profile-name" id="profile-name">--</div>
-    <div class="profile-info">Age: <span id="profile-age">--</span></div>
+    <div class="profile-info">
+      <strong>Age:</strong> <span id="profile-age">--</span>
+    </div>
     <div class="profile-info">
       <strong>Primary Job:</strong>
-      <span id="profile-primary" class="job-tag primary">--</span>
+      <span id="profile-primary">--</span>
     </div>
     <div class="profile-info">
       <strong>Secondary Job:</strong>
-      <span id="profile-secondary" class="job-tag secondary">--</span>
+      <span id="profile-secondary">--</span>
     </div>
     <button class="weekly-btn" onclick="showMySchedule()">My Weekly Schedule</button>
   </div>
@@ -240,25 +242,28 @@
     });
 
     function updateSidebar(user) {
+      // --- Profil bilgilerini düz metin olarak ayarla; renkli etiket ekleme ---
       document.getElementById("profile-photo").src = user.photo || "images/default.jpg";
       document.getElementById("profile-name").innerText = user.fullName;
       document.getElementById("profile-age").innerText = user.age || "--";
 
-      // Primary job'u renklendirilmiş tag ile göster
       const primaryElem = document.getElementById("profile-primary");
       if (user.primaryJob) {
         primaryElem.innerText = user.primaryJob;
       } else {
         primaryElem.innerText = "-";
       }
+      // Burada renkli sınıfı SİLMİŞ olduk:
+      primaryElem.classList.remove("job-tag", "primary");
 
-      // Secondary job'u renklendirilmiş tag ile göster
       const secondaryElem = document.getElementById("profile-secondary");
-      if (user.secondaryJob && user.secondaryJob.toLowerCase() !== "null") {
+      if (user.secondaryJob && user.secondaryJob.trim().toLowerCase() !== "null") {
         secondaryElem.innerText = user.secondaryJob;
       } else {
         secondaryElem.innerText = "-";
       }
+      // Renkli sınıfı SİL:
+      secondaryElem.classList.remove("job-tag", "secondary");
     }
 
     function loadDepartments(user) {
@@ -428,12 +433,24 @@
     // --------------------- YENİ EKLENDİ BİTTİ ---------------------
 
     function showMySchedule() {
+      // 1) Sidebar’daki “Primary Job” ve “Secondary Job” metinlerini artık renkli etiket haline getir:
+      const primaryElem = document.getElementById("profile-primary");
+      if (primaryElem.innerText !== "-") {
+        primaryElem.classList.add("job-tag", "primary");
+      }
+      const secondaryElem = document.getElementById("profile-secondary");
+      if (secondaryElem.innerText !== "-" && secondaryElem.innerText.trim().toLowerCase() !== "null") {
+        secondaryElem.classList.add("job-tag", "secondary");
+      }
+
+      // 2) Departman bölümünü gizle ve içeriği temizle
       document.getElementById("department-section").style.display = "none";
       document.getElementById("main-content").innerHTML = "";
 
-      // Sadece takvim tablosunu gösteriyoruz:
+      // 3) Yalnızca takvim tablosunu göster:
       showScheduleTableForUser(currentUser);
 
+      // 4) Departman butonlarındaki aktif/inaktif işaretleri kaldır
       document.querySelectorAll('.department-button').forEach(b => {
         b.classList.remove('active','inactive');
       });
@@ -455,13 +472,12 @@
               <span class="job-tag primary">${primaryJob}</span>
             </div>
             <div><strong>Secondary Job:</strong> 
-              <span class="job-tag secondary">${(secondaryJob && secondaryJob !== "null") ? secondaryJob : "-"}</span>
+              <span class="job-tag secondary">${(secondaryJob && secondaryJob.trim().toLowerCase() !== "null") ? secondaryJob : "-"}</span>
             </div>
           </div>
         </div>
       `;
 
-      // Tabloyu çizme kısmı aynen devam ediyor
       html += `<table><thead><tr><th rowspan="2">Departments</th>`;
       days.forEach(day => html += `<th colspan="3">${day}</th>`);
       html += `</tr><tr>`;
@@ -501,6 +517,7 @@
     }
 
     document.getElementById("profile-photo").addEventListener("click", () => {
+      // Kullanıcı adına tıklanırsa departman bölümünü tekrar göster ve içeriği temizle
       document.getElementById("department-section").style.display = "block";
       document.getElementById("main-content").innerHTML = "";
       document.querySelectorAll('.department-button').forEach(b => {
