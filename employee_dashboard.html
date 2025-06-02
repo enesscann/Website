@@ -160,6 +160,27 @@
       margin-top: 30px;
       margin-bottom: 20px;
     }
+
+    /* ---------------------------------------------- */
+    /*  Legend için eklenen sınıflar:               */
+    .job-tag.primary {
+      display: inline-block;
+      background-color: green;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+    .job-tag.secondary {
+      display: inline-block;
+      background-color: yellow;
+      color: black;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 18px;
+    }
+    /* ---------------------------------------------- */
   </style>
 </head>
 <body>
@@ -246,7 +267,6 @@
       container.innerHTML = "";
 
       allDepts.forEach(dep => {
-        // 4) Doğru template literal kullanımı:
         const imgSrc = `images/${dep.toLowerCase()}.png`;
         const btn = document.createElement("button");
         btn.className = "department-button";
@@ -275,7 +295,6 @@
         )
       );
 
-      // 5) HTML'i string içinde oluşturuyoruz (backtick ile)
       let html = `<h3>${job} Employees:</h3>`;
       html += list.map(emp => {
         const photo = emp.photo || "images/default.jpg";
@@ -426,6 +445,13 @@
             <div><strong>Primary Job:</strong> ${primaryJob}</div>
             <div><strong>Secondary Job:</strong> ${secondaryJob && secondaryJob !== "null" ? secondaryJob : "-"}</div>
           </div>
+        </div>
+      `;
+      // Legend bloğu:
+      html += `
+        <div style="margin-bottom: 16px; font-size: 18px;">
+          <span class="job-tag primary">Primary Job</span>
+          <span class="job-tag secondary">Secondary Job</span>
         </div>
       `;
       html += `<table><thead><tr><th rowspan="2">Departments</th>`;
