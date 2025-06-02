@@ -350,6 +350,8 @@
       html += `</tbody></table>`;
       document.getElementById("main-content").innerHTML = html;
     }
+
+    // --------------------- YENİ EKLENDİ ---------------------
     function showScheduleTableForUser(user) {
       const shifts = allShifts[user.id];
       if (!shifts) {
@@ -395,13 +397,13 @@
 
       document.getElementById("main-content").innerHTML = html;
     }
-    /* --------------------- YENİ EKLENDİ BİTTİ --------------------- */
+    // --------------------- YENİ EKLENDİ BİTTİ ---------------------
 
     function showMySchedule() {
       document.getElementById("department-section").style.display = "none";
       document.getElementById("main-content").innerHTML = "";
 
-      // Burada artık detaylı showSchedule() yerine "sadece tablo" fonksiyonumuz çağrılıyor:
+      // Sadece takvim tablosunu gösteriyoruz:
       showScheduleTableForUser(currentUser);
 
       document.querySelectorAll('.department-button').forEach(b => {
@@ -462,14 +464,6 @@
       html += `<div class="hours-display">Total Weekly Working Hours: ${totalHours} hours</div>`;
 
       document.getElementById("main-content").innerHTML = html;
-    }
-
-    function showMySchedule() {
-      document.getElementById("department-section").style.display = "none";
-      showSchedule(currentUser.id, currentUser.fullName, currentUser.primaryJob, currentUser.secondaryJob, currentUser.age);
-      document.querySelectorAll('.department-button').forEach(b => {
-        b.classList.remove('active','inactive');
-      });
     }
 
     document.getElementById("profile-photo").addEventListener("click", () => {
