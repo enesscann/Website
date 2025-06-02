@@ -327,12 +327,12 @@
         deptContainer.appendChild(btn);
       });
 
-      // “My Weekly Schedule” redirects to employee.html for current user
+      // “My Weekly Schedule” redirects to employee.html for current user, from=dashboard ekleniyor
       document.getElementById("my-schedule-btn").onclick = () => {
-        window.location.href = `employee.html?id=${currentUser.id}`;
+        window.location.href = `employee.html?id=${currentUser.id}&from=dashboard`;
       };
 
-      // Profile photo click: reset to show only departments, hide employee list & schedule
+      // Profil fotoğrafına tıklanırsa: önceki ekranda kal (manager.html'e gitme)
       document.getElementById("profile-photo").onclick = () => {
         document.querySelectorAll(".department-button").forEach(b => {
           b.classList.remove("active");
@@ -346,7 +346,7 @@
     });
 
     function selectDepartment(department, clickedBtn) {
-      // Highlight clicked department button; dim others
+      // Butonları renklendir
       document.querySelectorAll(".department-button").forEach(b => {
         b.classList.remove("active");
         b.classList.add("inactive");
@@ -354,10 +354,9 @@
       clickedBtn.classList.add("active");
       clickedBtn.classList.remove("inactive");
 
-      // Hide any previous schedule
       hideWeeklyDept();
 
-      // Filter employees in same department (excluding current user)
+      // Aynı departmandaki çalışanlar (kendi kullanıcı hariç)
       const filtered = allEmployees.filter(emp => {
         if (emp.id === currentUser.id) return false;
         const inPrimary = emp.primaryJob === department;
@@ -368,7 +367,7 @@
         return inPrimary || inSecondary || inDept;
       });
 
-      // Render employee cards
+      // Çalışan kartlarını oluştur
       const listContainer = document.getElementById("employee-list");
       listContainer.innerHTML = "";
       if (filtered.length === 0) {
@@ -381,18 +380,17 @@
             <img src="${emp.photo || 'images/default.jpg'}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
             <span>${emp.fullName}</span>
           `;
+          // Burada from=dashboard ekliyoruz
           card.onclick = () => {
-            window.location.href = `employee.html?id=${emp.id}`;
+            window.location.href = `employee.html?id=${emp.id}&from=dashboard`;
           };
           listContainer.appendChild(card);
         });
       }
 
-      // Show weekly-dept container and set its department name
+      // Weekly departman schedule görünümünü aç
       document.getElementById("weekly-dept-name").innerText = department;
       document.getElementById("weekly-dept-container").classList.remove("hidden");
-
-      // Clicking the toggle shows/hides schedule
       document.getElementById("weekly-dept-toggle").onclick = () => {
         toggleWeeklyDept(department);
       };
@@ -408,7 +406,6 @@
       const scheduleDiv = document.getElementById("weekly-dept-schedule");
       if (scheduleDiv.innerHTML.trim() === "") {
         scheduleDiv.innerHTML = generateDepartmentSchedule(department);
-        // Equalize cell heights
         const tbl = scheduleDiv.querySelector('table');
         if (tbl) equalizeAllCellHeights(tbl);
       } else {
