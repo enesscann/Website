@@ -41,7 +41,6 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 10px;
-      /* cursor: pointer; */ /* Artık tıklanabilir göstermiyoruz */
     }
     .profile-name {
       font-size: 25px;
@@ -248,6 +247,7 @@
     <div class="profile-info">
       Secondary Job: <span id="profile-secondary">--</span>
     </div>
+    <!-- Dashboard’dan açıldığında employee_from_dashboard.html’e yönlendirecek -->
     <button class="weekly-btn" id="my-schedule-btn">My Weekly Schedule</button>
   </div>
   <div class="main">
@@ -276,7 +276,7 @@
     }
     const employeeIdNum = parseInt(employeeId, 10);
 
-    // Fetch data
+    // Veri yükleme
     Promise.all([
       fetch("data/employees.json").then(r => r.json()),
       fetch("data/shifts.json").then(r => r.json())
@@ -284,14 +284,14 @@
       allEmployees = employees;
       allShifts = shifts;
 
-      // Find current user
+      // Geçerli kullanıcıyı bul
       currentUser = allEmployees.find(e => e.id === employeeIdNum);
       if (!currentUser) {
         console.error("Employee not found");
         return;
       }
 
-      // Populate sidebar
+      // Sidebar’ı doldur
       document.getElementById("profile-photo").src = currentUser.photo || "images/default.jpg";
       document.getElementById("profile-name").innerText = currentUser.fullName;
       document.getElementById("profile-age").innerText = currentUser.age || "--";
@@ -301,7 +301,7 @@
         ? currentUser.secondaryJob
         : "-";
 
-      // Populate departments
+      // Departmanları toplamak
       const deptSet = new Set();
       if (currentUser.department) {
         if (Array.isArray(currentUser.department)) {
@@ -326,9 +326,9 @@
         deptContainer.appendChild(btn);
       });
 
-      // “My Weekly Schedule” redirects to employee.html for current user
+      // "My Weekly Schedule" butonuna tıklanınca yeni dosyaya yönlendir
       document.getElementById("my-schedule-btn").onclick = () => {
-        window.location.href = `employee.html?id=${currentUser.id}`;
+        window.location.href = `employee_from_dashboard.html?id=${currentUser.id}`;
       };
     }).catch(err => {
       console.error("Error loading data:", err);
@@ -345,7 +345,7 @@
 
       hideWeeklyDept();
 
-      // Aynı departmandaki çalışanlar (kendi kullanıcı hariç)
+      // Aynı departmandaki diğer çalışanları filtrele
       const filtered = allEmployees.filter(emp => {
         if (emp.id === currentUser.id) return false;
         const inPrimary = emp.primaryJob === department;
@@ -369,8 +369,9 @@
             <img src="${emp.photo || 'images/default.jpg'}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
             <span>${emp.fullName}</span>
           `;
+          // Dashboard’dan gelen versiyona yönlendiriyoruz
           card.onclick = () => {
-            window.location.href = `employee.html?id=${emp.id}`;
+            window.location.href = `employee_from_dashboard.html?id=${emp.id}`;
           };
           listContainer.appendChild(card);
         });
