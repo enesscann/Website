@@ -205,15 +205,13 @@
   <div id="buttons"></div>
 
   <div id="employee-container" class="employee-container"></div>
-  </div> <!-- employee-container kapanışı -->
+  </div> 
 
   <script>
     function equalizeAllCellHeights(tableEl) {
     const cells = Array.from(tableEl.querySelectorAll('th, td'));
-    // önce her hücrenin 'auto' olmasını sağlayıp gerçek yüksekliğini ölç
     cells.forEach(c => c.style.height = 'auto');
     const maxH = cells.reduce((mx, c) => Math.max(mx, c.offsetHeight), 0);
-    // sonra hepsini maksimum yüksekliğe sabitle
     cells.forEach(c => c.style.height = maxH + 'px');
   }
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
