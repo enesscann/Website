@@ -11,6 +11,7 @@
       height: 100vh;
       position: relative;
     }
+
     .background-layer {
       position: fixed;
       top: 0;
@@ -25,8 +26,11 @@
       z-index: -1;
       pointer-events: none;
     }
+
+    /* ---------- sidebar ---------- */
     .sidebar {
-      width: 250px;
+      width: 250px;           /* Sabit genişlik */
+      flex-shrink: 0;         /* Hiçbir koşulda daralmamasını sağla */
       background: #f4f4f4;
       border-right: 1px solid #ccc;
       padding: 20px;
@@ -35,6 +39,7 @@
       align-items: flex-start;
       box-sizing: border-box;
     }
+
     .profile-photo {
       width: 100px;
       height: 100px;
@@ -42,11 +47,13 @@
       object-fit: cover;
       margin-bottom: 10px;
     }
+
     .profile-name {
       font-size: 25px;
       font-weight: bold;
       margin-bottom: 5px;
     }
+
     .profile-info {
       font-size: 18px;
       font-weight: bold;
@@ -55,9 +62,9 @@
     .profile-info span {
       font-weight: normal;
     }
+
     .weekly-btn {
       margin-top: 20px;
-      display: inline-block;
       width: 100%;
       padding: 10px;
       font-size: 18px;
@@ -72,23 +79,28 @@
     .weekly-btn:hover {
       background-color: #0056b3;
     }
+
+    /* ---------- main (sağ kısım) ---------- */
     .main {
-      flex-grow: 1;
+      flex-grow: 1;           /* Kalan alanı kaplasın */
       padding: 20px;
       box-sizing: border-box;
-      overflow-y: auto;
+      overflow-y: auto;      /* İçerik taşarsa dikey kaydır */
       display: flex;
       flex-direction: column;
     }
+
     .department-section h3 {
       font-size: 24px;
       margin-bottom: 14px;
     }
+
     .department-list {
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
     }
+
     .department-button {
       width: 140px;
       height: 140px;
@@ -120,6 +132,7 @@
     .department-button.inactive {
       opacity: 0.5;
     }
+
     .employee-list {
       display: flex;
       flex-wrap: wrap;
@@ -152,6 +165,7 @@
       text-align: center;
       font-weight: bold;
     }
+
     .weekly-toggle-blue {
       margin-top: 20px;
       padding: 10px;
@@ -168,9 +182,11 @@
     .weekly-toggle-blue:hover {
       background-color: #0056b3;
     }
+
     .weekly-schedule.hidden {
       display: none;
     }
+
     table {
       border-collapse: collapse;
       width: 100%;
@@ -201,6 +217,7 @@
       display: block;
       margin-bottom: 5px;
     }
+
     .legend {
       clear: both;
       float: right;
@@ -213,6 +230,7 @@
     }
     .legend-box.primary   { display: inline-block; width: 25px; height: 16px; margin-right: 6px; border-radius: 3px; background-color: green; }
     .legend-box.secondary { display: inline-block; width: 25px; height: 16px; margin-right: 6px; border-radius: 3px; background-color: yellow; }
+
     .job-tag.primary {
       background-color: green;
       color: white;
@@ -235,6 +253,8 @@
 </head>
 <body>
   <div class="background-layer"></div>
+
+  <!-- ---------- Sol kısım: Sidebar ---------- -->
   <div class="sidebar">
     <img id="profile-photo" class="profile-photo" src="images/default.jpg" alt="Profile Photo">
     <div class="profile-name" id="profile-name">--</div>
@@ -250,11 +270,14 @@
     <!-- Dashboard’dan açıldığında employee_from_dashboard.html’e yönlendirecek -->
     <button class="weekly-btn" id="my-schedule-btn">My Weekly Schedule</button>
   </div>
+
+  <!-- ---------- Sağ kısım: Main içerik ---------- -->
   <div class="main">
     <div class="department-section">
       <h3>Departments:</h3>
       <div class="department-list" id="department-list"></div>
     </div>
+
     <div id="employee-list" class="employee-list"></div>
 
     <!-- Weekly department schedule placeholder -->
@@ -276,7 +299,7 @@
     }
     const employeeIdNum = parseInt(employeeId, 10);
 
-    // Veri yükleme
+    // JSON dosyalarını alıyoruz
     Promise.all([
       fetch("data/employees.json").then(r => r.json()),
       fetch("data/shifts.json").then(r => r.json())
@@ -284,7 +307,7 @@
       allEmployees = employees;
       allShifts = shifts;
 
-      // Geçerli kullanıcıyı bul
+      // Giriş yapan kullanıcıyı bul
       currentUser = allEmployees.find(e => e.id === employeeIdNum);
       if (!currentUser) {
         console.error("Employee not found");
@@ -301,7 +324,7 @@
         ? currentUser.secondaryJob
         : "-";
 
-      // Departmanları toplamak
+      // Departmanları bir sete ekle
       const deptSet = new Set();
       if (currentUser.department) {
         if (Array.isArray(currentUser.department)) {
@@ -313,6 +336,7 @@
       if (currentUser.primaryJob) deptSet.add(currentUser.primaryJob);
       if (currentUser.secondaryJob) deptSet.add(currentUser.secondaryJob);
 
+      // Departman butonlarını oluştur
       const deptContainer = document.getElementById("department-list");
       deptContainer.innerHTML = "";
       deptSet.forEach(dep => {
@@ -326,16 +350,17 @@
         deptContainer.appendChild(btn);
       });
 
-      // "My Weekly Schedule" butonuna tıklanınca yeni dosyaya yönlendir
+      // My Weekly Schedule => employee_from_dashboard.html’ye yönlendir
       document.getElementById("my-schedule-btn").onclick = () => {
         window.location.href = `employee_from_dashboard.html?id=${currentUser.id}`;
       };
+
     }).catch(err => {
       console.error("Error loading data:", err);
     });
 
     function selectDepartment(department, clickedBtn) {
-      // Butonları renklendir
+      // Butonları renklendir: seçilen aktif, diğerleri soluk
       document.querySelectorAll(".department-button").forEach(b => {
         b.classList.remove("active");
         b.classList.add("inactive");
@@ -369,7 +394,7 @@
             <img src="${emp.photo || 'images/default.jpg'}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
             <span>${emp.fullName}</span>
           `;
-          // Dashboard’dan gelen versiyona yönlendiriyoruz
+          // Dashboard’dan gelen sürüme gönderiyoruz
           card.onclick = () => {
             window.location.href = `employee_from_dashboard.html?id=${emp.id}`;
           };
@@ -377,7 +402,7 @@
         });
       }
 
-      // Weekly departman schedule görünümünü aç
+      // Weekly departman schedule kısmını göster
       document.getElementById("weekly-dept-name").innerText = department;
       document.getElementById("weekly-dept-container").classList.remove("hidden");
       document.getElementById("weekly-dept-toggle").onclick = () => {
