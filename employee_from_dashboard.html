@@ -94,8 +94,8 @@
   <div class="background-layer"></div>
 
   <div class="info-container">
-    <!-- Burada onclick: “dashboard” sayfasına geri döner -->
-    <img id="employee-photo" src="images/default.jpg" alt="Photo" onclick="goBackToDashboard()" title="Click to return to dashboard">
+    <!-- Burada onclick: localStorage'dan logged-in kullanıcı ID'sini alıp dashboard'a dönüyor -->
+    <img id="employee-photo" src="images/default.jpg" alt="Photo" title="Click to return to your dashboard" onclick="goBackToDashboard()">
     <div>
       <h1 id="employee-name">Employee</h1>
       <p><strong>Age:</strong> <span id="employee-age">--</span></p>
@@ -193,7 +193,14 @@
     });
 
     function goBackToDashboard() {
-      window.location.href = `employee_dashboard.html?id=${empId}`;
+      // localStorage'dan logged-in kullanıcı ID'sini alıp dashboard'a döner
+      const loggedInId = localStorage.getItem('userId');
+      if (loggedInId) {
+        window.location.href = `employee_dashboard.html?id=${loggedInId}`;
+      } else {
+        // Eğer bir şekilde userId yoksa yine direkt dashboard'a gider (parametresiz)
+        window.location.href = `employee_dashboard.html`;
+      }
     }
   </script>
 </body>
