@@ -27,10 +27,9 @@
       pointer-events: none;
     }
 
-    /* ---------- sidebar ---------- */
     .sidebar {
-      width: 250px;           /* Sabit genişlik */
-      flex-shrink: 0;         /* Hiçbir koşulda daralmamasını sağla */
+      width: 300px;         
+      flex-shrink: 0;         
       background: #f4f4f4;
       border-right: 1px solid #ccc;
       padding: 20px;
@@ -80,12 +79,11 @@
       background-color: #0056b3;
     }
 
-    /* ---------- main (sağ kısım) ---------- */
     .main {
-      flex-grow: 1;           /* Kalan alanı kaplasın */
+      flex-grow: 1;          
       padding: 20px;
       box-sizing: border-box;
-      overflow-y: auto;      /* İçerik taşarsa dikey kaydır */
+      overflow-y: auto;     
       display: flex;
       flex-direction: column;
     }
@@ -102,14 +100,14 @@
     }
 
     .department-button {
-      width: 140px;
-      height: 140px;
+      width: 180px;
+      height: 180px;
       border: 4px solid #ccc;
       border-radius: 12px;
       background: #fff;
       cursor: pointer;
       text-align: center;
-      font-size: 18px;
+      font-size: 25px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -118,8 +116,8 @@
       box-sizing: border-box;
     }
     .department-button img {
-      width: 60px;
-      height: 60px;
+      width: 120px;
+      height: 120px;
       object-fit: contain;
       margin-bottom: 6px;
     }
@@ -143,7 +141,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 120px;
+      width: 180px;
       padding: 10px;
       background-color: #fff;
       border-radius: 10px;
@@ -155,8 +153,8 @@
       background-color: #f0f8ff;
     }
     .employee-card img {
-      width: 80px;
-      height: 80px;
+      width: 120px;
+      height: 120px;
       object-fit: cover;
       border-radius: 50%;
     }
@@ -254,7 +252,7 @@
 <body>
   <div class="background-layer"></div>
 
-  <!-- ---------- Sol kısım: Sidebar ---------- -->
+
   <div class="sidebar">
     <img id="profile-photo" class="profile-photo" src="images/default.jpg" alt="Profile Photo">
     <div class="profile-name" id="profile-name">--</div>
@@ -267,11 +265,9 @@
     <div class="profile-info">
       Secondary Job: <span id="profile-secondary">--</span>
     </div>
-    <!-- Dashboard’dan açıldığında employee_from_dashboard.html’e yönlendirecek -->
     <button class="weekly-btn" id="my-schedule-btn">My Weekly Schedule</button>
   </div>
 
-  <!-- ---------- Sağ kısım: Main içerik ---------- -->
   <div class="main">
     <div class="department-section">
       <h3>Departments:</h3>
@@ -280,7 +276,6 @@
 
     <div id="employee-list" class="employee-list"></div>
 
-    <!-- Weekly department schedule placeholder -->
     <div id="weekly-dept-container" class="weekly-schedule hidden">
       <button class="weekly-toggle-blue" id="weekly-dept-toggle">Weekly <span id="weekly-dept-name"></span> Schedule</button>
       <div id="weekly-dept-schedule"></div>
@@ -299,7 +294,6 @@
     }
     const employeeIdNum = parseInt(employeeId, 10);
 
-    // JSON dosyalarını alıyoruz
     Promise.all([
       fetch("data/employees.json").then(r => r.json()),
       fetch("data/shifts.json").then(r => r.json())
@@ -307,14 +301,14 @@
       allEmployees = employees;
       allShifts = shifts;
 
-      // Giriş yapan kullanıcıyı bul
+
       currentUser = allEmployees.find(e => e.id === employeeIdNum);
       if (!currentUser) {
         console.error("Employee not found");
         return;
       }
 
-      // Sidebar’ı doldur
+
       document.getElementById("profile-photo").src = currentUser.photo || "images/default.jpg";
       document.getElementById("profile-name").innerText = currentUser.fullName;
       document.getElementById("profile-age").innerText = currentUser.age || "--";
@@ -336,7 +330,6 @@
       if (currentUser.primaryJob) deptSet.add(currentUser.primaryJob);
       if (currentUser.secondaryJob) deptSet.add(currentUser.secondaryJob);
 
-      // Departman butonlarını oluştur
       const deptContainer = document.getElementById("department-list");
       deptContainer.innerHTML = "";
       deptSet.forEach(dep => {
@@ -350,9 +343,8 @@
         deptContainer.appendChild(btn);
       });
 
-      // My Weekly Schedule => employee_from_dashboard.html’ye yönlendir
       document.getElementById("my-schedule-btn").onclick = () => {
-        window.location.href = `employee_from_dashboard.html?id=${currentUser.id}`;
+        window.location.href = `employee_from_dashboard.html?id=${currentUser.id}&viewer=${currentUser.id}`;
       };
 
     }).catch(err => {
@@ -360,7 +352,7 @@
     });
 
     function selectDepartment(department, clickedBtn) {
-      // Butonları renklendir: seçilen aktif, diğerleri soluk
+
       document.querySelectorAll(".department-button").forEach(b => {
         b.classList.remove("active");
         b.classList.add("inactive");
@@ -370,7 +362,7 @@
 
       hideWeeklyDept();
 
-      // Aynı departmandaki diğer çalışanları filtrele
+
       const filtered = allEmployees.filter(emp => {
         if (emp.id === currentUser.id) return false;
         const inPrimary = emp.primaryJob === department;
@@ -381,7 +373,6 @@
         return inPrimary || inSecondary || inDept;
       });
 
-      // Çalışan kartlarını oluştur
       const listContainer = document.getElementById("employee-list");
       listContainer.innerHTML = "";
       if (filtered.length === 0) {
@@ -394,15 +385,13 @@
             <img src="${emp.photo || 'images/default.jpg'}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
             <span>${emp.fullName}</span>
           `;
-          // Dashboard’dan gelen sürüme gönderiyoruz
           card.onclick = () => {
-            window.location.href = `employee_from_dashboard.html?id=${emp.id}`;
+            window.location.href = `employee_from_dashboard.html?id=${emp.id}&viewer=${currentUser.id}`;
           };
           listContainer.appendChild(card);
         });
       }
 
-      // Weekly departman schedule kısmını göster
       document.getElementById("weekly-dept-name").innerText = department;
       document.getElementById("weekly-dept-container").classList.remove("hidden");
       document.getElementById("weekly-dept-toggle").onclick = () => {
