@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Employee Detail (From Dashboard)</title>
   <style>
-    /* ---------- Genel Stil ---------- */
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
@@ -37,7 +36,7 @@
       height: 100px;
       object-fit: cover;
       border-radius: 50%;
-      cursor: pointer; /* Geri dön tıklanabilir olsun */
+      cursor: pointer; 
     }
 
     .job-tag.primary {
@@ -95,7 +94,6 @@
   <div class="background-layer"></div>
 
   <div class="info-container">
-    <!-- Burada onclick: viewer parametresine göre Dashboard’a dönecek -->
     <img
       id="employee-photo"
       src="images/default.jpg"
@@ -140,25 +138,21 @@
   <div class="hours-display" id="total-hours">Total Weekly Working Hours: --</div>
 
   <script>
-    // 1) Öncelikle URL parametrelerini okuyalım:
     const query    = new URLSearchParams(window.location.search);
-    const empId    = query.get("id");      // “görüntülenen çalışanın id’si”
-    const viewerId = query.get("viewer");  // “dashboard’u açan (login) çalışanın id’si”
+    const empId    = query.get("id");    
+    const viewerId = query.get("viewer");  
 
     const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
     const jobs = ["Waiter","Housekeeper","Receptionist","Bellboy","Baseman","Valet","Security","Chef","Bartender"];
 
-    // 2) Çalışan ve vardiya verilerini fetch edip tabloyu oluşturalım:
     Promise.all([
       fetch("data/employees.json").then(r => r.json()),
       fetch("data/shifts.json").then(r => r.json())
     ])
     .then(([employees, allShifts]) => {
-      // empId ile eşleşen çalışanı bul:
       const emp = employees.find(e => e.id == empId);
       if (!emp) throw new Error("Employee not found");
 
-      // Profil fotoğrafı / isim / yaş / iş bilgilerini doldur:
       document.getElementById("employee-name").innerText = emp.fullName;
       document.getElementById("employee-age").innerText  = emp.age;
 
@@ -176,7 +170,6 @@
 
       document.getElementById("employee-photo").src = emp.photo;
 
-      // Vardiya tablosunu oluştur:
       const shifts = allShifts[empId];
       const tbody  = document.getElementById("table-body");
       let totalHours = 0;
@@ -206,14 +199,10 @@
       alert("Error loading data: " + err.message);
     });
 
-    // 3) “Geri Dön” tuşu: URL parametrelerindeki viewerId’ye göre Dashboard’u aç
     function goBackToDashboard() {
       if (viewerId) {
-        // viewerId parametresi varsa onun Dashboard’una dön:
         window.location.href = `employee_dashboard.html?id=${viewerId}`;
       } else {
-        // viewerId yoksa—mesela yanlışlıkla doğrudan bu sayfaya geldi ise—
-        // fallback olarak localStorage’daki userId’yi çek:
         const stored = localStorage.getItem('userId');
         if (stored) {
           window.location.href = `employee_dashboard.html?id=${stored}`;
