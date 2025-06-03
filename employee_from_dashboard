@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Detail (From Dashboard)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .background-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('images/background.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.25;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .info-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .info-container img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .job-tag.primary {
+      background-color: green;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+      font-size: 16px;
+      display: inline-block;
+    }
+
+    .job-tag.secondary {
+      background-color: yellow;
+      color: black;
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+      font-size: 16px;
+      display: inline-block;
+    }
+
+    table {
+      border: 2px solid #888;
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 3px solid #888;
+      padding: 8px;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    td[data-color="primary"]   { background-color: green; color: white; }
+    td[data-color="secondary"] { background-color: yellow; color: black; }
+    td[data-color="other"]     { background-color: lightgray; color: black; }
+
+    th[colspan] {
+      background-color: #c4df9b;
+      border-right: 2px solid #444;
+    }
+
+    .hours-display {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-layer"></div>
+
+  <div class="info-container">
+    <!-- Burada onclick: “dashboard” sayfasına geri döner -->
+    <img id="employee-photo" src="images/default.jpg" alt="Photo" onclick="goBackToDashboard()" title="Click to return to dashboard">
+    <div>
+      <h1 id="employee-name">Employee</h1>
+      <p><strong>Age:</strong> <span id="employee-age">--</span></p>
+      <p><strong>Primary Job:</strong> <span id="employee-job" class="job-tag primary">--</span></p>
+      <p><strong>Secondary Job:</strong> <span id="employee-secondary" class="job-tag secondary">--</span></p>
+    </div>
+  </div>
+
+  <h2>Weekly Shift Schedule</h2>
+
+  <table id="schedule-table">
+    <thead>
+      <tr>
+        <th rowspan="2">Departments</th>
+        <th colspan="3">Monday</th>
+        <th colspan="3">Tuesday</th>
+        <th colspan="3">Wednesday</th>
+        <th colspan="3">Thursday</th>
+        <th colspan="3">Friday</th>
+        <th colspan="3">Saturday</th>
+        <th colspan="3" style="border-right: none;">Sunday</th>
+      </tr>
+      <tr>
+        <th>08:00 - 16:00</th><th>16:00 - 00:00</th><th>00:00 - 08:00</th>
+        <th>08:00 - 16:00</th><th>16:00 - 00:00</th><th>00:00 - 08:00</th>
+        <th>08:00 - 16:00</th><th>16:00 - 00:00</th><th>00:00 - 08:00</th>
+        <th>08:00 - 16:00</th><th>16:00 - 00:00</th><th>00:00 - 08:00</th>
+        <th>08:00 - 16:00</th><th>16:00 - 00:00</th><th>00:00 - 08:00</th>
+        <th>08:00 - 16:00</th><th>16:00 - 00:00</th><th>00:00 - 08:00</th>
+        <th>08:00 - 16:00</th><th>16:00 - 00:00</th><th>00:00 - 08:00</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+  <div class="hours-display" id="total-hours">Total Weekly Working Hours: --</div>
+
+  <script>
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const jobs = ["Waiter", "Housekeeper", "Receptionist", "Bellboy", "Baseman", "Valet", "Security", "Chef", "Bartender"];
+    const query = new URLSearchParams(window.location.search);
+    const empId = query.get("id");
+
+    Promise.all([
+      fetch("data/employees.json").then(r => r.json()),
+      fetch("data/shifts.json").then(r => r.json())
+    ])
+    .then(([employees, allShifts]) => {
+      const emp = employees.find(e => e.id == empId);
+      if (!emp) throw new Error("Employee not found");
+
+      document.getElementById("employee-name").innerText = emp.fullName;
+      document.getElementById("employee-age").innerText = emp.age;
+
+      const primarySpan = document.getElementById("employee-job");
+      primarySpan.innerText = emp.primaryJob;
+      primarySpan.classList.add("job-tag", "primary");
+
+      const secondarySpan = document.getElementById("employee-secondary");
+      if (emp.secondaryJob) {
+        secondarySpan.innerText = emp.secondaryJob;
+        secondarySpan.classList.add("job-tag", "secondary");
+      } else {
+        secondarySpan.innerText = "-";
+      }
+
+      document.getElementById("employee-photo").src = emp.photo;
+
+      const shifts = allShifts[empId];
+      const tbody = document.getElementById("table-body");
+
+      let totalHours = 0;
+      jobs.forEach(job => {
+        let row = `<tr><td>${job}</td>`;
+        days.forEach(day => {
+          ["V-1", "V-2", "V-3"].forEach(shift => {
+            const s = shifts?.[shift]?.[day];
+            let colorClass = "";
+            if (s && s.job === job) {
+              if (job === emp.primaryJob) colorClass = "primary";
+              else if (job === emp.secondaryJob) colorClass = "secondary";
+              else colorClass = "other";
+              totalHours += 8;
+            }
+            row += `<td data-color="${colorClass}">${colorClass ? "✔" : ""}</td>`;
+          });
+        });
+        row += `</tr>`;
+        tbody.innerHTML += row;
+      });
+
+      document.getElementById("total-hours").innerText = `Total Weekly Working Hours: ${totalHours} hours`;
+    })
+    .catch(err => {
+      alert("Error loading data: " + err.message);
+    });
+
+    function goBackToDashboard() {
+      window.location.href = `employee_dashboard.html?id=${empId}`;
+    }
+  </script>
+</body>
+</html>
