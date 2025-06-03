@@ -41,7 +41,7 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 10px;
-      cursor: pointer;
+      /* cursor: pointer; */ /* Artık tıklanabilir göstermiyoruz */
     }
     .profile-name {
       font-size: 25px;
@@ -153,7 +153,6 @@
       text-align: center;
       font-weight: bold;
     }
-    /* Mavi renkli toggle butonu */
     .weekly-toggle-blue {
       margin-top: 20px;
       padding: 10px;
@@ -327,19 +326,9 @@
         deptContainer.appendChild(btn);
       });
 
-      // “My Weekly Schedule” redirects to employee.html for current user, from=dashboard ekleniyor
+      // “My Weekly Schedule” redirects to employee.html for current user
       document.getElementById("my-schedule-btn").onclick = () => {
-        window.location.href = `employee.html?id=${currentUser.id}&from=dashboard`;
-      };
-
-      // Profil fotoğrafına tıklanırsa: önceki ekranda kal (manager.html'e gitme)
-      document.getElementById("profile-photo").onclick = () => {
-        document.querySelectorAll(".department-button").forEach(b => {
-          b.classList.remove("active");
-          b.classList.add("inactive");
-        });
-        document.getElementById("employee-list").innerHTML = "";
-        hideWeeklyDept();
+        window.location.href = `employee.html?id=${currentUser.id}`;
       };
     }).catch(err => {
       console.error("Error loading data:", err);
@@ -380,9 +369,8 @@
             <img src="${emp.photo || 'images/default.jpg'}" alt="${emp.fullName}" onerror="this.src='images/default.jpg'">
             <span>${emp.fullName}</span>
           `;
-          // Burada from=dashboard ekliyoruz
           card.onclick = () => {
-            window.location.href = `employee.html?id=${emp.id}&from=dashboard`;
+            window.location.href = `employee.html?id=${emp.id}`;
           };
           listContainer.appendChild(card);
         });
